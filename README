@@ -1,0 +1,23 @@
+1D TRANSPORT V.1
+
+Committed 1/25/14 to GITHUB (username: chucklingchuck)
+
+V.1
+1) LDFE and LDFE-EQ angular quadratures.
+2) Region definitions.
+3) LDFE spatial discretization.
+4) One-to-one mapping across region.
+5) XML parser.
+6) HDF5 output of angular flux.
+
+Plans for V.2
+1) Add isotropic and anisotropic scattering using source iteration.
+2) Add external source option.
+3) Verify balance parameter improves with increasing quadrature order.
+4) Add the Jarrell-Adams mapping schemes to allow regions with different quadrature order.
+
+Plans for V.2+
+1) Investigate alternative mapping algorithms.
+2) Investigate adaptive schemes.
+3) Implement OpenMP to multi-thread sets of directions.
+4) Look at aggregation and scheduling methods that minimize solve times.

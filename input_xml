@@ -1,0 +1,21 @@
+<prototype>
+    <grid>
+        <spat_type entry = "LDFE"/>
+        <num_reg entry="3"/>
+        <num_cells entry="4 4 4"/>
+        <reg_size entry="1 1 1"/>
+    </grid>
+    <quad>
+        <type entry="LDFE_EQ"/>
+        <order entry="1 1 1"/>
+    </quad>
+    <mat>
+        <abs_xs entry="1 1 1"/>
+        <scat_xs entry="0 0 0"/>
+        <source entry="0 0 0"/>
+    </mat>
+    <bc>
+        <left entry="1"/>
+        <right entry="1"/>
+    </bc>
+</prototype>
