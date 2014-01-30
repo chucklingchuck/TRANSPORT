@@ -17,16 +17,16 @@ int main()
     
     /* Read in XML input file */
     Input input_param;
-    
+
     /* Build problem */
     Problem problem_setup(input_param);
-    
+
     /* Call solver */
     Solver solution(input_param, problem_setup);
-    
+
     /* Write HDF5 output file */
-    Output(input_param, solution);
-    
+    Output(problem_setup, solution);
+
     /* Exit program */
     EXIT_SUCCESS;
     

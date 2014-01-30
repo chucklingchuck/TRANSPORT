@@ -28,9 +28,4 @@ public:
     LDFE_quad(int);
 };
 
-class LDFE_quad_eq: public Quadrature {
-public:
-    LDFE_quad_eq(int);
-};
-
 #endif /* defined(__TRANSPORT__Quadrature__) */

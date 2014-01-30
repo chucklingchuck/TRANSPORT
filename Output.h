@@ -13,6 +13,6 @@
 #include "Solver.h"
 #include "Input.h"
 
-void Output(Input, Solver);
+void Output(Problem, Solver);
 
 #endif

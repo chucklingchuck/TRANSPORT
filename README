@@ -1,23 +1,53 @@
-1D TRANSPORT V.1
+1D TRANSPORT V.1.1
 
-Committed 1/25/14 to GITHUB (username: chucklingchuck)
+Committed 1/29/14 to GITHUB (username: chucklingchuck)
 
-V.1
+Build instructions
+------------------
+The following libraries are needed:
+-BLAS (http://www.netlib.org/blas/)
+-LAPACK (http://www.netlib.org/lapack/)
+-ARMADILLO (http://arma.sourceforge.net/download.html)
+-HDF5 (http://www.hdfgroup.org/HDF5/release/obtain5.html)
+-GFORTRAN (http://gcc.gnu.org/wiki/GFortran)
+After installing the libraries:
+1) Go into MAKEFILE and change the library paths as needed.
+2) Run 'MAKE' to generate the executable 'TRANSPORT'
+3) Run executable by typing './TRANSPORT' into the terminal.
+4) The input file 'input_xml' must be in the same folder.
+5) If desired, run the Matlab postprocessor 'post_proc.m' which reads in the generated HDF5 files.
+
+V.1 (previous release)
+----------------------
 1) LDFE and LDFE-EQ angular quadratures.
 2) Region definitions.
 3) LDFE spatial discretization.
 4) One-to-one mapping across region.
-5) XML parser.
+5) XML input parser.
 6) HDF5 output of angular flux.
 
-Plans for V.2
-1) Add isotropic and anisotropic scattering using source iteration.
-2) Add external source option.
-3) Verify balance parameter improves with increasing quadrature order.
-4) Add the Jarrell-Adams mapping schemes to allow regions with different quadrature order.
+V.1.1 (current release)
+-----------------------
+1) Fixed bug in LDFE angular quadratures.
+2) Removed LDFE-EQ angular quadratures because the new LDFE angular quadratures are inherently equal-weighted.
+3) Added isotopic and anisotropic scattering using source iteration.
+4) Added external source option.
+5) Added Matlab post-processor for calculating balance parameter.
+6) HDF5 output of problem definitions required to calculate balance parameter.
 
-Plans for V.2+
+Remaining plans for V.2
+-----------------------
+1) Add simple mapping algorithms to allow for regions with different quadrature order.
+2) Add simple adaptive angular schemes.
+
+Plans for V.3
+--------------
 1) Investigate alternative mapping algorithms.
-2) Investigate adaptive schemes.
+2) Investigate alternative adaptive schemes.
+3) Investigate smooth-discontinuous quadrature interpolation.
 3) Implement OpenMP to multi-thread sets of directions.
-4) Look at aggregation and scheduling methods that minimize solve times.
+4) Investigate aggregation and scheduling schemes minimizing solve times.
+
+Pipedreams
+----------
+1) Extend into 2D geometry.

@@ -15,15 +15,15 @@
 class Sweep {
 protected:
     vector<mat> region_psi;
-    vec region_phi;
 public:
     vector<mat> get_region_psi() {return region_psi;};
-    vec get_region_phi() {return region_phi;};
 };
 
 class LDFE_spat: public Sweep {
 public:
-    LDFE_spat(Region*, vector<mat>, string);
+    LDFE_spat(Region*, vector<mat>, vector<mat>, string);
 };
+
+double legendre (double, double);
 
 #endif

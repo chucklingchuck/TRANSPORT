@@ -19,13 +19,12 @@ class Solver {
 protected:
     vector<vector<mat> > psi_pos;
     vector<vector<mat> > psi_neg;
-    vector<vec > phi;
+    vector<vector<mat> > phi;
 public:
     vector<vector<mat> > get_psi_pos() {return psi_pos;};
     vector<vector<mat> > get_psi_neg() {return psi_neg;};
-    vector<vec > get_phi() {return phi;};
+    vector<vector<mat> > get_phi() {return phi;};
     Solver(Input, Problem);
 };
-
 
 #endif

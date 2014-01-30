@@ -87,16 +87,40 @@ Input::Input () {
         abs_xs(counter) = conversion_abs_xs;
         counter++;
     }
+    // scat_order
+    string scat_order_char = mat_node->first_node("scat_order")->first_attribute("entry")->value();
+    istringstream iss_scat_order(scat_order_char); // Convert string to vector of integers
+    int conversion_scat_order;
+    counter = 0;
+    scat_order.resize(num_reg);
+    while (iss_scat_order >> conversion_scat_order) {
+        scat_order(counter) = conversion_scat_order;
+        counter++;
+    }
     // scat_xs
     string scat_xs_char = mat_node->first_node("scat_xs")->first_attribute("entry")->value();
     istringstream iss_scat_xs(scat_xs_char); // Convert string to vector of doubles
     double conversion_scat_xs;
+    int scat_xs_size = 0;
+    for (int i=0; i<num_reg; i++) {
+        for (int j=0; j<=scat_order(i); j++) {
+            scat_xs_size++;
+        }
+    }
     counter = 0;
-    scat_xs.resize(num_reg);
+    scat_xs.resize(scat_xs_size);
     while (iss_scat_xs >> conversion_scat_xs) {
         scat_xs(counter) = conversion_scat_xs;
         counter++;
     }
+    // si_tol
+    string si_tol_char = mat_node->first_node("si_tol")->first_attribute("entry")->value();
+    istringstream iss_si_tol(si_tol_char); // Converts string to double
+    iss_si_tol >> si_tol;
+    // si_cycles
+    string si_cycles_char = mat_node->first_node("si_cycles")->first_attribute("entry")->value();
+    istringstream iss_si_cycles(si_cycles_char); // Converts string to double
+    iss_si_cycles >> si_cycles;
     // ext_source
     string ext_source_char = mat_node->first_node("source")->first_attribute("entry")->value();
     istringstream iss_ext_source(ext_source_char); // Convert string to vector of doubles

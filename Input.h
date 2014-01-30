@@ -23,7 +23,10 @@ protected:
     string quad_type;
     Col<int> quad_order;
     vec abs_xs;
+    Col<int> scat_order;
     vec scat_xs;
+    double si_tol;
+    int si_cycles;
     vec ext_source;
     double psi_left;
     double psi_right;
@@ -35,7 +38,10 @@ public:
     string get_quad_type() {return quad_type;};
     Col<int> get_quad_order() {return quad_order;};
     vec get_abs_xs() {return abs_xs;};
+    Col<int> get_scat_order() {return scat_order;};
     vec get_scat_xs() {return scat_xs;};
+    double get_si_tol() {return si_tol;};
+    int get_si_cycles() {return si_cycles;};
     vec get_ext_source() {return ext_source;};
     double get_psi_left() {return psi_left;};
     double get_psi_right() {return psi_right;};
