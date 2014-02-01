@@ -26,7 +26,7 @@ V.1 (previous release)
 5) XML input parser.
 6) HDF5 output of angular flux.
 
-V.1.1 (current release)
+V.1.1 (previous release)
 -----------------------
 1) Fixed bug in LDFE angular quadratures.
 2) Removed LDFE-EQ angular quadratures because the new LDFE angular quadratures are inherently equal-weighted.
@@ -35,19 +35,29 @@ V.1.1 (current release)
 5) Added Matlab post-processor for calculating balance parameter.
 6) HDF5 output of problem definitions required to calculate balance parameter.
 
-Remaining plans for V.2
------------------------
-1) Add simple mapping algorithms to allow for regions with different quadrature order.
-2) Add simple adaptive angular schemes.
+V.2 (current release)
+---------------------
+1) Added Matlab post-processor ability to plot selected angular flux across the problem domain.
+2) Added Matlab post-processor ability to plot scalar moments across problem domain.
+3) Added Matlab post-processor ability to plot angular flux at selected interfaces.
 
 Plans for V.3
 --------------
-1) Investigate alternative mapping algorithms.
-2) Investigate alternative adaptive schemes.
-3) Investigate smooth-discontinuous quadrature interpolation.
-3) Implement OpenMP to multi-thread sets of directions.
-4) Investigate aggregation and scheduling schemes minimizing solve times.
+1) Investigate and add mapping methods to pass angular psi between regions with different quadrature orders.
+
+Plans for V.4
+-------------
+1) Investigate and add angular adaptive multigrid methods.
+
+Plans for V.5
+-------------
+1) Investigate smooth-discontinuous quadrature interpolation.
+
+Plans for V.5+
+--------------
+1) Implement OpenMP to multi-thread sets of directions.
+2) Investigate and add aggregation and scheduling methods minimizing solve times.
 
 Pipedreams
 ----------
-1) Extend into 2D geometry.
+1) Extend into 2D geometry!

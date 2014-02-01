@@ -10,12 +10,12 @@
         <order entry="1 1"/>
     </quad>
     <mat>
-        <abs_xs entry="2 2"/>
-        <scat_order entry="2 2"/>
-        <scat_xs entry="1 1 1 1 1 1"/>
+        <abs_xs entry="1 1"/>
+        <scat_order entry="0 0"/>
+        <scat_xs entry="2 2"/>
         <si_tol entry="0.000000001"/>
         <si_cycles entry="100"/>
-        <source entry="0 0"/>
+        <source entry="1 1"/>
     </mat>
     <bc>
         <left entry="1"/>
