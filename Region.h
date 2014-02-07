@@ -9,33 +9,31 @@
 #ifndef TRANSPORT_Region_h
 #define TRANSPORT_Region_h
 
-#include "Quadrature.h"
 #include "Common.h"
+#include "Quadrature.h"
 
 class Region {
 protected:
-    Quadrature* quad_ptr;
     int order;
     int num_cells;
-    double reg_size;
     int scat_order;
+    double reg_size;
     double abs_xs;
-    vec scat_xs;
     double ext_source;
     string quad_type;
+    LDFE_quad* quad_ptr;
+    vec scat_xs;
 public:
     int get_order() {return order;};
     int get_num_cells() {return num_cells;};
-    double get_reg_size() {return reg_size;};
     int get_scat_order() {return scat_order;};
+    double get_reg_size() {return reg_size;};
     double get_abs_xs() {return abs_xs;};
-    vec get_scat_xs() {return scat_xs;};
     double get_ext_source() {return ext_source;};
     string get_quad_type() {return quad_type;};
-    mat get_quad_wgts() {return quad_ptr->get_wgts();};
-    mat get_quad_dirs() {return quad_ptr->get_dirs();};
-    vector<mat> get_quad_basis() {return quad_ptr->get_basis();};
-    Region(int, int, double, int, double, vec, double, string);
+    LDFE_quad* get_quad() {return quad_ptr;};
+    vec get_scat_xs() {return scat_xs;};
+    Region (int, int, double, int, double, vec, double, string);
 };
 
 #endif

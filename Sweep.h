@@ -12,17 +12,7 @@
 #include "Common.h"
 #include "Region.h"
 
-class Sweep {
-protected:
-    vector<mat> region_psi;
-public:
-    vector<mat> get_region_psi() {return region_psi;};
-};
-
-class LDFE_spat: public Sweep {
-public:
-    LDFE_spat(Region*, vector<mat>, vector<mat>, string);
-};
+void LDFE_spat (Region*, vector<mat>, string);
 
 double legendre (double, double);
 

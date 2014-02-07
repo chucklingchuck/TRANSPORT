@@ -6,28 +6,33 @@
 //  Copyright (c) 2014 Cheuk Lau. All rights reserved.
 //
 
+#include "Common.h"
 #include "Input.h"
-#include "Output.h"
 #include "Problem.h"
 #include "Solver.h"
-#include "Common.h"
+#include "Output.h"
 
 int main()
 {
     
     /* Read in XML input file */
+    cout << "Reading in XML input file..." << endl;
     Input input_param;
 
     /* Build problem */
-    Problem problem_setup(input_param);
-
+    cout << "Building the problem..." << endl;
+    Problem problem(input_param);
+        
     /* Call solver */
-    Solver solution(input_param, problem_setup);
+    cout << "Running the solver..." << endl;
+    Solver(input_param, problem);
 
     /* Write HDF5 output file */
-    Output(problem_setup, solution);
+    cout << "Writing the output..." << endl;
+    Output(problem);
 
     /* Exit program */
+    cout << "Program successfully ran!" << endl;
     EXIT_SUCCESS;
     
 }

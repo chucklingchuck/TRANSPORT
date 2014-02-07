@@ -12,23 +12,6 @@
 #include "Common.h"
 #include "Region.h"
 
-class Mapping {
-protected:
-    vec psi_to;
-public:
-    vec get_psi_to() {return psi_to;};
-};
-
-class one_to_one: public Mapping {
-public:
-    one_to_one(vector<mat>, string);
-};
-
-/*
-class Jarrel1: public Mapping {
-public:
-    Jarrel1(vector<mat>, int, int);
-};
-*/
+void method1 (Region*, Region*, string);
 
 #endif

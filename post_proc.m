@@ -194,17 +194,17 @@ for i = 1 : num_reg - 1
         counter = counter+2;
     end
     % Gather right psi
-    psi_right = zeros(1, size(psi{i}, 3));
+    psi_right = zeros(1, size(psi{i+1}, 3));
     for j = 1 : size(psi{i+1}, 3)
         psi_right(j) = psi{i+1}(1, 1, j);        
     end
     % Plot
     figure
-    left_plot = plot(dirs_left, psi_left, '-s');
-    set(left_plot, 'LineWidth', 1.25, 'MarkerSize', 5);
+    left_plot = plot(dirs_left, psi_left, 's');
+    set(left_plot, 'LineWidth', 1.25, 'MarkerSize', 10);
     hold all;
-    right_plot = plot(dirs_right, psi_right, '-s');
-    set(right_plot, 'LineWidth', 1.25, 'MarkerSize', 5);
+    right_plot = plot(dirs_right, psi_right, 's');
+    set(right_plot, 'LineWidth', 1.25, 'MarkerSize', 10);
     grid on
     x_name = sprintf('directional cosine \\mu');
     xlabel(x_name, 'FontSize', 18)

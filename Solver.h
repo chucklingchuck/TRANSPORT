@@ -9,22 +9,11 @@
 #ifndef TRANSPORT_Solver_h
 #define TRANSPORT_Solver_h
 
+#include "Common.h"
 #include "Problem.h"
 #include "Sweep.h"
 #include "Mapping.h"
-#include "Common.h"
-#include "Region.h"
 
-class Solver {
-protected:
-    vector<vector<mat> > psi_pos;
-    vector<vector<mat> > psi_neg;
-    vector<vector<mat> > phi;
-public:
-    vector<vector<mat> > get_psi_pos() {return psi_pos;};
-    vector<vector<mat> > get_psi_neg() {return psi_neg;};
-    vector<vector<mat> > get_phi() {return phi;};
-    Solver(Input, Problem);
-};
+void Solver (Input, Problem);
 
 #endif

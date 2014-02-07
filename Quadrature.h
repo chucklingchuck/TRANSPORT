@@ -10,22 +10,14 @@
 #define __TRANSPORT__Quadrature__
 
 #include "Common.h"
+#include "LDFE_reg.h"
 
-class Quadrature {
+class LDFE_quad {
 protected:
-    mat dirs;
-    mat wgts;
-    int order;
-    vector<mat> basis;
+    vector<LDFE_reg*> quad;    
 public:
-    mat get_dirs() {return dirs;};
-    mat get_wgts() {return wgts;};
-    vector<mat> get_basis() {return basis;};
+    vector<LDFE_reg*> get_quad() {return quad;};
+    LDFE_quad (int);
 };
 
-class LDFE_quad: public Quadrature {
-public:
-    LDFE_quad(int);
-};
-
-#endif /* defined(__TRANSPORT__Quadrature__) */
+#endif

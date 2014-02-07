@@ -35,23 +35,25 @@ V.1.1 (previous release)
 5) Added Matlab post-processor for calculating balance parameter.
 6) HDF5 output of problem definitions required to calculate balance parameter.
 
-V.2 (current release)
+V.2 (previous release)
 ---------------------
 1) Added Matlab post-processor ability to plot selected angular flux across the problem domain.
 2) Added Matlab post-processor ability to plot scalar moments across problem domain.
 3) Added Matlab post-processor ability to plot angular flux at selected interfaces.
 
-Plans for V.3
+V.3 (current release)
 --------------
-1) Investigate and add mapping methods to pass angular psi between regions with different quadrature orders.
+1) Store quadrature and angular flux into binary trees for mapping and adaptivity.
+2) Added a simple mapping method (i.e., angular averaging) to pass psi between regions with different quadrature orders.
 
 Plans for V.4
 -------------
-1) Investigate and add angular adaptive multigrid methods.
+1) Reasearch, implement and test more advanced mapping algorithms.
+2) Investigate smooth-discontinuous quadrature interpolation.
 
 Plans for V.5
 -------------
-1) Investigate smooth-discontinuous quadrature interpolation.
+1) Investigate and add angular adaptive multigrid methods.
 
 Plans for V.5+
 --------------

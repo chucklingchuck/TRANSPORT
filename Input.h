@@ -16,35 +16,37 @@ using namespace rapidxml;
 
 class Input {
 protected:
-    string spat_type;
     int num_reg;
-    Col<int> num_cells;
-    vec reg_size;
-    string quad_type;
-    Col<int> quad_order;
-    vec abs_xs;
-    Col<int> scat_order;
-    vec scat_xs;
-    double si_tol;
     int si_cycles;
-    vec ext_source;
+    double si_tol;
     double psi_left;
     double psi_right;
+    string spat_type;
+    string map_type;
+    string quad_type;
+    Col<int> num_cells;
+    Col<int> quad_order;
+    Col<int> scat_order;
+    vec abs_xs;
+    vec scat_xs;
+    vec reg_size;
+    vec ext_source;
 public:
     int get_num_reg() {return num_reg;};
-    Col<int> get_num_cells() {return num_cells;};
-    vec get_reg_size() {return reg_size;};
-    string get_spat_type() {return spat_type;};
-    string get_quad_type() {return quad_type;};
-    Col<int> get_quad_order() {return quad_order;};
-    vec get_abs_xs() {return abs_xs;};
-    Col<int> get_scat_order() {return scat_order;};
-    vec get_scat_xs() {return scat_xs;};
-    double get_si_tol() {return si_tol;};
     int get_si_cycles() {return si_cycles;};
-    vec get_ext_source() {return ext_source;};
+    double get_si_tol() {return si_tol;};
     double get_psi_left() {return psi_left;};
     double get_psi_right() {return psi_right;};
+    string get_spat_type() {return spat_type;};
+    string get_map_type() {return map_type;};
+    string get_quad_type() {return quad_type;};
+    Col<int> get_num_cells() {return num_cells;};
+    Col<int> get_quad_order() {return quad_order;};
+    Col<int> get_scat_order() {return scat_order;};
+    vec get_abs_xs() {return abs_xs;};
+    vec get_scat_xs() {return scat_xs;};
+    vec get_reg_size() {return reg_size;};
+    vec get_ext_source() {return ext_source;};
     Input();
 };
 

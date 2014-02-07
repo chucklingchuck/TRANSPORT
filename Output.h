@@ -10,9 +10,8 @@
 #define TRANSPORT_Output_h
 
 #include "Common.h"
-#include "Solver.h"
-#include "Input.h"
+#include "Problem.h"
 
-void Output(Problem, Solver);
+void Output(Problem);
 
 #endif

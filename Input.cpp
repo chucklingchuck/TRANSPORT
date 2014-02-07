@@ -32,12 +32,13 @@ Input::Input () {
     root_node = doc.first_node("prototype");
     grid_node = root_node->first_node("grid");
     quad_node = root_node->first_node("quad");
-    mat_node = root_node->first_node("mat");
-    bc_node = root_node->first_node("bc");
+    mat_node  = root_node->first_node("mat");
+    bc_node   = root_node->first_node("bc");
     
     /* Read grid values */
-    // num_reg
+    // spat_type
     spat_type = grid_node->first_node("spat_type")->first_attribute("entry")->value();
+    // num_reg
     string num_reg_char = grid_node->first_node("num_reg")->first_attribute("entry")->value();
     istringstream iss_num_reg(num_reg_char); // Convert string to integer
     iss_num_reg >> num_reg;
@@ -75,6 +76,8 @@ Input::Input () {
         quad_order(counter) = conversion_quad_order;
         counter++;
     }
+    // map_type
+    map_type = quad_node->first_node("map_type")->first_attribute("entry")->value();
     
     /* Read mat values */
     // abs_xs

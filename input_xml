@@ -1,24 +1,25 @@
 <prototype>
     <grid>
         <spat_type entry = "LDFE"/>
-        <num_reg entry="2"/>
-        <num_cells entry="100 100"/>
-        <reg_size entry="1 1"/>
+        <num_reg entry="3"/>
+        <num_cells entry="100 100 100"/>
+        <reg_size entry="1 1 1"/>
     </grid>
     <quad>
         <type entry="LDFE"/>
-        <order entry="1 1"/>
+        <order entry="0 2 0"/>
+        <map_type entry = "METHOD1"/>
     </quad>
     <mat>
-        <abs_xs entry="1 1"/>
-        <scat_order entry="0 0"/>
-        <scat_xs entry="2 2"/>
+        <abs_xs entry="1 1 1"/>
+        <scat_order entry="1 1 1"/>
+        <scat_xs entry="1 1 1 1 1 1"/>
         <si_tol entry="0.000000001"/>
         <si_cycles entry="100"/>
-        <source entry="1 1"/>
+        <source entry="0 0 0"/>
     </mat>
     <bc>
-        <left entry="1"/>
-        <right entry="1"/>
+        <left entry="10"/>
+        <right entry="10"/>
     </bc>
 </prototype>
