@@ -1,0 +1,70 @@
+1D TRANSPORT V.1.1
+
+Committed 1/29/14 to GITHUB (username: chucklingchuck)
+
+Build instructions
+------------------
+The following libraries are needed:
+-BLAS (http://www.netlib.org/blas/)
+-LAPACK (http://www.netlib.org/lapack/)
+-ARMADILLO (http://arma.sourceforge.net/download.html)
+-HDF5 (http://www.hdfgroup.org/HDF5/release/obtain5.html)
+-GFORTRAN (http://gcc.gnu.org/wiki/GFortran)
+After installing the libraries:
+1) Go into MAKEFILE and change the library paths as needed.
+2) Run 'MAKE' to generate the executable 'TRANSPORT'
+3) Run executable by typing './TRANSPORT' into the terminal.
+4) The input file 'input_xml' must be in the same folder.
+5) If desired, run the Matlab postprocessor 'post_proc.m' which reads in the generated HDF5 files.
+
+V.1 (previous release)
+----------------------
+1) LDFE and LDFE-EQ angular quadratures.
+2) Region definitions.
+3) LDFE spatial discretization.
+4) One-to-one mapping across region.
+5) XML input parser.
+6) HDF5 output of angular flux.
+
+V.1.1 (previous release)
+-----------------------
+1) Fixed bug in LDFE angular quadratures.
+2) Removed LDFE-EQ angular quadratures because the new LDFE angular quadratures are inherently equal-weighted.
+3) Added isotopic and anisotropic scattering using source iteration.
+4) Added external source option.
+5) Added Matlab post-processor for calculating balance parameter.
+6) HDF5 output of problem definitions required to calculate balance parameter.
+
+V.2 (previous release)
+---------------------
+1) Added Matlab post-processor ability to plot selected angular flux across the problem domain.
+2) Added Matlab post-processor ability to plot scalar moments across problem domain.
+3) Added Matlab post-processor ability to plot angular flux at selected interfaces.
+
+V.3 (previous release)
+----------------------
+1) Store quadrature and angular flux into binary trees for mapping and adaptivity.
+2) Added a simple mapping method (i.e., angular averaging) to pass psi between regions with different quadrature orders.
+
+V.4 (current release)
+---------------------
+1) Added mapping conserving zeroth and first flux moments between LDFE angular regions across spatial interfaces.
+2) Added linear fix-up preserving first flux moments across spatial interfaces.
+
+Plans for V.5
+-------------
+1) Research, implement and test more advanced mapping and fixup algorithms.
+2) Investigate smooth-discontinuous quadrature interpolation.
+
+Plans for V.6
+-------------
+1) Investigate and add angular adaptive multigrid methods.
+
+Plans for V.6+
+--------------
+1) Implement OpenMP to multi-thread sets of directions.
+2) Investigate and add aggregation and scheduling methods minimizing solve times.
+
+Pipedreams
+----------
+1) Extend into 2D geometry!
