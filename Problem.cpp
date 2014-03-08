@@ -24,13 +24,13 @@ Problem::Problem (Input input_param) {
     int counter = 0;
     for (int i=0; i<num_reg; i++){
         scat_xs_ind.push_back(vec());
-        scat_xs_ind[i].resize(scat_order[i]+1);
-        for (int j=0; j<scat_order[i]+1; j++) {
+        scat_xs_ind[i].resize(scat_order(i)+1);
+        for (int j=0; j<scat_order(i)+1; j++) {
             scat_xs_ind[i](j)=scat_xs_all(counter);
             counter++;
         }
     }
-    
+
     /* Create vector of pointers to each region */
     Regions.resize(num_reg);
     for (int i=0; i<num_reg; i++){

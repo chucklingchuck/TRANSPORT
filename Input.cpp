@@ -19,7 +19,8 @@ Input::Input () {
     xml_node<> * quad_node;
     xml_node<> * mat_node;
     xml_node<> * bc_node;
-    
+    xml_node<> * adapt_node;
+
     /* Read the XML file into a vector  */
     ifstream input_file ("input_xml");
     vector<char> buffer((istreambuf_iterator<char>(input_file)), istreambuf_iterator<char>());
@@ -29,12 +30,13 @@ Input::Input () {
     doc.parse<0> (&buffer[0]);
     
     /* Set the XML pointers */
-    root_node = doc.first_node("prototype");
-    grid_node = root_node->first_node("grid");
-    quad_node = root_node->first_node("quad");
-    mat_node  = root_node->first_node("mat");
-    bc_node   = root_node->first_node("bc");
-    
+    root_node  = doc.first_node("prototype");
+    grid_node  = root_node->first_node("grid");
+    quad_node  = root_node->first_node("quad");
+    mat_node   = root_node->first_node("mat");
+    bc_node    = root_node->first_node("bc");
+    adapt_node = root_node->first_node("adapt");
+
     /* Read grid values */
     // spat_type
     spat_type = grid_node->first_node("spat_type")->first_attribute("entry")->value();
@@ -138,6 +140,8 @@ Input::Input () {
     }
     
     /* Read bc values */
+    // bc_type
+    bc_type = bc_node->first_node("bc_type")->first_attribute("entry")->value();
     // psi_left
     string psi_left_char = bc_node->first_node("left")->first_attribute("entry")->value();
     istringstream iss_psi_left(psi_left_char); // Convert string to double
@@ -146,4 +150,32 @@ Input::Input () {
     string psi_right_char = bc_node->first_node("right")->first_attribute("entry")->value();
     istringstream iss_psi_right(psi_right_char); // Convert string to double
     iss_psi_right >> psi_right;
+
+    /* Read adaptivity values */
+    // adapt_type
+    adapt_type = adapt_node->first_node("adapt_type")->first_attribute("entry")->value();
+    // alpha
+    string alpha_char = adapt_node->first_node("alpha")->first_attribute("entry")->value();
+    istringstream iss_alpha(alpha_char); // Convert string to double
+    iss_alpha >> alpha;
+    // beta
+    string beta_char = adapt_node->first_node("beta")->first_attribute("entry")->value();
+    istringstream iss_beta(beta_char); // Convert string to double
+    iss_beta >> beta;
+    // adapt_tol
+    string adapt_tol_char = adapt_node->first_node("adapt_tol")->first_attribute("entry")->value();
+    istringstream iss_adapt_tol(adapt_tol_char); // Convert string to double
+    iss_adapt_tol >> adapt_tol;
+    // max_cycles_per_adapt
+    string max_cycles_per_adapt_char = adapt_node->first_node("max_cycles_per_adapt")->first_attribute("entry")->value();
+    istringstream iss_max_cycles_per_adapt(max_cycles_per_adapt_char); // Convert string to integer
+    iss_max_cycles_per_adapt >> max_cycles_per_adapt;
+    // si_per_adapt
+    string si_per_adapt_char = adapt_node->first_node("si_per_adapt")->first_attribute("entry")->value();
+    istringstream iss_si_per_adapt(si_per_adapt_char); // Convert string to integer
+    iss_si_per_adapt >> si_per_adapt;
+    // eps_thresh
+    string eps_thresh_char = adapt_node->first_node("eps_thresh")->first_attribute("entry")->value();
+    istringstream iss_eps_thresh(eps_thresh_char); // Convert string to double
+    iss_eps_thresh >> eps_thresh;
 }

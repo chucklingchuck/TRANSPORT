@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=main.cpp Input.cpp LDFE_reg.cpp Region.cpp Problem.cpp Quadrature.cpp Solver.cpp Sweep.cpp Mapping.cpp Output.cpp Fixup.cpp
+SOURCES=main.cpp Input.cpp LDFE_reg.cpp Region.cpp Problem.cpp Quadrature.cpp Solver.cpp Sweep.cpp Mapping.cpp Output.cpp Fixup.cpp BC.cpp Adapt.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=TRANSPORT
 

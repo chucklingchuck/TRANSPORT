@@ -12,7 +12,7 @@
 #include "Common.h"
 #include "Region.h"
 
-void LDFE_spat (Region*, vector<mat>, string);
+void LDFE_spat (Region*, vector<mat>, string, vec, vector<LDFE_reg*>);
 
 double legendre (double, double);
 

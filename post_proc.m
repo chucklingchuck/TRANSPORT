@@ -1,7 +1,7 @@
 function post_proc(num_reg)
 
 clc;
-close force all;
+%close force all;
 
 %% Read in HDF5 data files
 psi = cell(num_reg, 1);
@@ -14,11 +14,11 @@ for i = 1 : num_reg
     % Quadrature directions
     filename = sprintf('dirs_reg%i', i-1);
     dirs{i} = hdf5read(filename, 'dataset');
-    % Quadrature weights    
+    % Quadrature weights
     filename = sprintf('wgts_reg%i', i-1);
     wgts{i} = hdf5read(filename, 'dataset');
 end
-% Region size    
+% Region size
 reg_size = hdf5read('reg_size', 'dataset');
 % Number of cells
 num_cells = hdf5read('num_cells', 'dataset');
@@ -28,7 +28,6 @@ abs_xs = hdf5read('abs_xs', 'dataset');
 ext_source = hdf5read('ext_source', 'dataset');
 
 %% Calculate balance parameter
-
 % Incoming current
 % Left boundary
 inflow_left = 0;
@@ -54,7 +53,6 @@ for i = 1 : size(dirs{num_reg},1)
     end
     j = j + 2;
 end
-
 % Outgoing current
 % Left boundary
 outflow_left = 0;
@@ -80,29 +78,28 @@ for i = 1 : size(dirs{num_reg},1)
     end
     j = j + 2;
 end
-
 % Absorption rate and external source
 abs_rate = 0;
 ext_source_tot = 0;
-for i = 1 : num_reg 
+for i = 1 : num_reg
     cell_size = double(reg_size(i))/double(num_cells(i));
     counter = 1;
     for j = 1 : num_cells(i)
         left_phi = 0;
         right_phi = 0;
         r = 1;
-        for k = 1 : size(dirs{i}, 1)           
+        for k = 1 : size(dirs{i}, 1)
             if dirs{i}(k,1) > 0
-               left_phi = left_phi+psi{i}(2,j,r)*wgts{i}(k,1)+...
-                   psi{i}(2,j,r+1)*wgts{i}(k,2);
-               right_phi = right_phi+psi{i}(1,j+1,r)*wgts{i}(k,1) + ...
-                   psi{i}(1,j+1,r+1)*wgts{i}(k,2);                
+                left_phi = left_phi+psi{i}(2,j,r)*wgts{i}(k,1)+...
+                    psi{i}(2,j,r+1)*wgts{i}(k,2);
+                right_phi = right_phi+psi{i}(1,j+1,r)*wgts{i}(k,1) + ...
+                    psi{i}(1,j+1,r+1)*wgts{i}(k,2);
             else
-               left_phi = left_phi+psi{i}(1,j,r)*wgts{i}(k,1)+...
-                   psi{i}(1,j,r+1)*wgts{i}(k,2);
-               right_phi = right_phi+psi{i}(2,j+1,r)*wgts{i}(k,1)+...
-                   psi{i}(2,j+1,r+1)*wgts{i}(k,2);                
-            end  
+                left_phi = left_phi+psi{i}(1,j,r)*wgts{i}(k,1)+...
+                    psi{i}(1,j,r+1)*wgts{i}(k,2);
+                right_phi = right_phi+psi{i}(2,j+1,r)*wgts{i}(k,1)+...
+                    psi{i}(2,j+1,r+1)*wgts{i}(k,2);
+            end
             ext_source_tot = ext_source_tot+(ext_source(i)*wgts{i}(k,1)+...
                 ext_source(i)*wgts{i}(k,2))*cell_size;
             r = r + 2;
@@ -112,13 +109,13 @@ for i = 1 : num_reg
         counter = counter+1;
     end
 end
-
 % Balance parameter
 bal = abs(inflow_right+inflow_left+ext_source_tot-outflow_right- ...
     outflow_left-abs_rate)/(inflow_right+inflow_left+ext_source_tot);
 fprintf('The balance parameter is: %E\n', bal);
 
 %% Plot psi and phi across each region
+    %{
 current_pos = 0;
 for i = 1 : num_reg % Go through each region
     figure
@@ -130,26 +127,29 @@ for i = 1 : num_reg % Go through each region
         dirs_use(counter+1) = dirs{i}(j, 2);
         counter = counter+2;
     end
+    
     % Edge locations
     edges = zeros(1, num_cells(i)+1);
     edges(1) = current_pos;
-    delta = reg_size(i)/double(num_cells(i));  
+    delta = reg_size(i)/double(num_cells(i));
     centers = zeros(1, num_cells(i));
     for j = 2 : num_cells(i)+1
         edges(j) = edges(j-1)+delta;
         centers(j-1) = edges(j-1)+delta/2;
-    end
+    end    
+    center_plot = centers(1 : 1e3 : end);
+    
     % Plot each psi
     s = cell(1, size(psi{i}, 3));
     for j = 1 : size(psi{i}, 3)
-      current_plot = plot(edges, psi{i}(1,:,j), '--s');
-      set(current_plot, 'LineWidth', 1.00, 'MarkerSize', 10);
-      s{j} = sprintf('\\mu=%.3f',dirs_use(j));
-      hold all;                
+        current_plot = plot(edges, psi{i}(1,:,j), '--s');
+        set(current_plot, 'LineWidth', 1.00, 'MarkerSize', 10);
+        s{j} = sprintf('\\mu=%.3f',dirs_use(j));
+        hold all;
     end
     % Set up plot options
     grid on
-    legend(s);        
+    legend(s);
     set(gca, 'FontSize', 14)
     xlabel('cell edge position', 'FontSize', 18)
     y_name = sprintf('\\psi');
@@ -159,7 +159,10 @@ for i = 1 : num_reg % Go through each region
     current_pos = current_pos+reg_size(i);
     % Plot phi
     figure
-    current_plot = plot(centers, phi_store{i}, '--s');
+    % current_plot = plot(centers, phi_store{i}, '--s');
+    phi_store_plot = phi_store{i};
+    phi_store_plot = phi_store_plot(1 :1e3: end);
+    current_plot = plot(center_plot, phi_store_plot, '--s');
     set(current_plot, 'LineWidth', 1.00, 'MarkerSize', 10);
     grid on
     xlabel('cell center position', 'FontSize', 18)
@@ -168,7 +171,8 @@ for i = 1 : num_reg % Go through each region
     title_name = sprintf('Region %i \\phi', i);
     title(title_name, 'FontSize', 18);
 end
- 
+%}
+
 %% Plot psi at interfaces
 for i = 1 : num_reg - 1
     % Rearrange quadrature directions for left region
@@ -196,7 +200,7 @@ for i = 1 : num_reg - 1
     % Gather right psi
     psi_right = zeros(1, size(psi{i+1}, 3));
     for j = 1 : size(psi{i+1}, 3)
-        psi_right(j) = psi{i+1}(1, 1, j);        
+        psi_right(j) = psi{i+1}(1, 1, j);
     end
     % Plot
     figure
@@ -218,8 +222,41 @@ for i = 1 : num_reg - 1
     title(title_name, 'FontSize', 18);
     legend_name_left = sprintf('left \\psi');
     legend_name_right = sprintf('right \\psi');
-    legend(legend_name_left, legend_name_right);        
-
+    legend(legend_name_left, legend_name_right);
 end
+%{
+%% Plot psi at right boundary
+% Rearrange quadrature directions for leftmost region
+dirs_right_boundary = zeros(1, size(dirs{num_reg},2)*2);
+counter = 1;
+for j = 1 : size(dirs{num_reg},1)
+    dirs_right_boundary(counter) = dirs{num_reg}(j, 1);
+    dirs_right_boundary(counter+1) = dirs{num_reg}(j, 2);
+    counter = counter+2;
+end
+% Gather psi at rightmost edge
+psi_right_boundary = zeros(1, size(psi{num_reg}, 3));
+for j = 1 : size(psi{num_reg}, 3)
+    psi_right_boundary(j) = psi{num_reg}(1, num_cells(num_reg) + 1, j);    
+end
+% Plot
+figure
+[dirs_right_boundary_sorted,r] = sort(dirs_right_boundary);
+psi_right_boundary_sorted = psi_right_boundary(r);
+right_boundary_plot = plot(dirs_right_boundary_sorted, psi_right_boundary_sorted, '--s');
+set(right_boundary_plot, 'LineWidth', 1.0, 'MarkerSize', 10);
+hold all;
+grid on
+x_name = sprintf('directional cosine \\mu');
+xlabel(x_name, 'FontSize', 18)
+y_name = sprintf('\\psi');
+ylabel(y_name, 'FontSize', 18)
+title_name = sprintf('Right Boundary \\psi');
+title(title_name, 'FontSize', 18);
 
+%% Calculate scalar flux at the center
+center_phi_all = phi_store{1};
+center_phi = center_phi_all(size(center_phi_all, 2));
+disp(center_phi);
+%}
 end

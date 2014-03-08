@@ -35,17 +35,16 @@ void Output(Problem problem) {
     vector<vec> wgts_store_tmp;
     vector<vec> dirs_store_tmp;
     
-    /* Write the angular flux, weights and directions of each region to temporary vectors */
+    /* Write psi, weights and directions of each region to temporary vectors */
     for (int i=0; i<num_reg; i++) {
         num_cells = Regions[i]->get_num_cells();
         num_edges = num_cells+1;
-        // Go through the positive then negative LDFE ranges
         for (int j=0; j<2; j++) {
-            quad_region   = Regions[i]->get_quad();        // This is the region quadrature pointer
-            quad_ind      = quad_region->get_quad();   // This is the vector of pos and neg LDFE regions
-            quad_selected = quad_ind[j];                   // This is the selected root LDFE node
+            quad_region   = Regions[i]->get_quad();    // Region quadrature pointer
+            quad_ind      = quad_region->get_quad();   // Vector of pos and neg LDFE regions
+            quad_selected = quad_ind[j];               // Selected root LDFE node
             if (quad_selected->get_has_children()==true) {
-                quad_children = quad_selected->get_children(); // This is the root node's 1st level children
+                quad_children = quad_selected->get_children(); // Root node's 1st level children
                 // Traverse the tree
                 reached_bottom = false;
                 while (reached_bottom == false) {
@@ -84,7 +83,7 @@ void Output(Problem problem) {
             }
         }
         
-        /* Convert temporary data to arma format for HDF5 storage */
+        /* Convert to arma format for HDF5 storage */
         psi_store.resize(2, num_edges, int(psi_store_tmp.size()));
         wgts_store.resize(int(wgts_store_tmp.size()), 2);
         dirs_store.resize(int(dirs_store_tmp.size()), 2);

@@ -13,12 +13,12 @@
 
 class LDFE_reg {
 protected:
-    bool has_children;
     vec dirs;
     vec wgts;
     mat basis;
-    vector<LDFE_reg*> children;
 public:
+    bool has_children;
+    vector<LDFE_reg*> children;
     bool get_has_children() {return has_children;};
     vector<LDFE_reg*> get_children() {return children;};
     vec get_dirs() {return dirs;};

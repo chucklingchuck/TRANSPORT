@@ -25,6 +25,7 @@ Region::Region (int param1, int param2, double param3, int param4, double param5
         quad_ptr = new LDFE_quad(order, quad_type);
     }
     else {
+    	cout << "Error in quadrature definition!" << endl;
         exit(EXIT_FAILURE);
     }
     

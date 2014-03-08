@@ -11,8 +11,12 @@
 
 #include "Common.h"
 #include "Region.h"
+#include "Sweep.h"
 
-// Linear interpolation fixup scheme
-void fixup1 (Region*, Region*, string, double);
+// Linear interpolation
+void fixup1 (int, int, string, double, vector<LDFE_reg*>, vector<LDFE_reg*>);
+
+// Left and right total source
+void fixup_source (string, vec, int, vector<Region*>, vec&, vec&, vector<vector<mat> >, Col<int>, Col<int>, vec);
 
 #endif

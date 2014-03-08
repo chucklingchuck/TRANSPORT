@@ -46,25 +46,47 @@ V.3 (previous release)
 1) Store quadrature and angular flux into binary trees for mapping and adaptivity.
 2) Added a simple mapping method (i.e., angular averaging) to pass psi between regions with different quadrature orders.
 
-V.4 (current release)
+V.4 (previous release)
 ---------------------
 1) Added mapping conserving zeroth and first flux moments between LDFE angular regions across spatial interfaces.
 2) Added linear fix-up preserving first flux moments across spatial interfaces.
 
-Plans for V.5
--------------
-1) Research, implement and test more advanced mapping and fixup algorithms.
-2) Investigate smooth-discontinuous quadrature interpolation.
+V.5 (current release)
+---------------------
+1) Added an adaptive angular algorithm using jump-based error indicators (no coarsenment).
 
 Plans for V.6
 -------------
-1) Investigate and add angular adaptive multigrid methods.
+1) Investigate and test additional mapping, fixup and adaptive algorithms. 
+Possible ideas for mapping:
+-None at the moment.
+Possible ideas for fixup:
+-Try fixing up LDFE region-wise instead of by single directions.
+-Try high to low-order interpolation schemes.
+Possible ideas for adaptive algorithms:
+-Projection-based error estimators
+-Duality-based error estimators
+2) Look at how coarsenment affects adaptive algorithm.
 
 Plans for V.6+
 --------------
 1) Implement OpenMP to multi-thread sets of directions.
 2) Investigate and add aggregation and scheduling methods minimizing solve times.
 
-Pipedreams
-----------
-1) Extend into 2D geometry!
+Notes
+-----
+We essentially have two choices if we want to extend these methods beyond 1D:
+1) Go directly into PDT. 
+2) Build an Sn code around the deal-ii FEM library. 
+The advantages of the latter choice are:
+1) Implementing different adaptive strategies MAY be easier with a self-written code.
+2) Implementing different mapping and fixup schemes MAY be easier with a self-written code.
+3) Gaining experience with deal-ii.
+4) Gaining experience writing my own multi-dimensional Sn code.
+The disadvantages of the latter choice are:
+1) The methods will have to be implemented into PDT eventually anyway.
+2) The code is self-written and therefore is not production level.
+3) The code may not be as efficiently parallelizable as PDT therefore scaling studies may not be possible.
+The best plan moving forward may be to test mapping, fixup and adaptive schemes using an Sn-deal-ii code then 
+implementing those algorithms into PDT with Michael and Darryl's help. Scaling studies can then be done using 
+those algorithms in STAPL-PDT.

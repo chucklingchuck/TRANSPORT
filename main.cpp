@@ -14,26 +14,26 @@
 
 int main()
 {
-    
-    /* Read in XML input file */
-    cout << "Reading in XML input file..." << endl;
-    Input input_param;
 
-    /* Build problem */
-    cout << "Building the problem..." << endl;
-    Problem problem(input_param);
-        
-    /* Call solver */
-    cout << "Running the solver..." << endl;
-    Solver(input_param, problem);
+	/* Read in XML input file */
+	cout << "Reading in XML input file..." << endl;
+	Input input_param;
 
-    /* Write HDF5 output file */
-    cout << "Writing the output..." << endl;
-    Output(problem);
+	/* Build problem */
+	cout << "Building the problem..." << endl;
+	Problem problem(input_param);
 
-    /* Exit program */
-    cout << "Program successfully ran!" << endl;
-    EXIT_SUCCESS;
-    
+	/* Call solver */
+	cout << "Running the solver..." << endl;
+	Solver(input_param, problem);
+
+	/* Write HDF5 output file */
+	cout << "Writing the output..." << endl;
+	Output(problem);
+
+	/* Exit program */
+	cout << "Program successfully ran!" << endl;
+	EXIT_SUCCESS;
+
 }
 

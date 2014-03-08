@@ -8,7 +8,6 @@
 
 #include "Mapping.h"
 
-// Simple mapping algorithm to test mapping between quadrature binary trees
 void mapping1 (Region* region_1, Region* region_2, string dir) {
     
     /* Initialize parameters */
@@ -61,16 +60,16 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
     }
     
     /* Find the root node for the region you are mapping from */
-    quad_region_1   = region_1->get_quad();            // This is the quadrature pointer for the region you are mapping from
-    quad_ind_1      = quad_region_1->get_quad();   // This is the vector of pos and neg LDFE regions for the region you are mapping from
-    quad_selected_1 = quad_ind_1[quad_index];          // This is the positive or negative root LDFE node you have selected
-    quad_children_1 = quad_selected_1->get_children(); // This is the root node's 1st level children
+    quad_region_1   = region_1->get_quad();            // Quadrature pointer for the region you are mapping from
+    quad_ind_1      = quad_region_1->get_quad();       // Vector of pos and neg LDFE regions for the region you are mapping from
+    quad_selected_1 = quad_ind_1[quad_index];          // Positive or negative root LDFE node you have selected
+    quad_children_1 = quad_selected_1->get_children(); // Root node's 1st level children
     
     /* Find the root node for the region you are mapping to */
-    quad_region_2   = region_2->get_quad();            // This is the quadrature pointer for the region you are mapping to
-    quad_ind_2      = quad_region_2->get_quad();   // This is the vector of pos and neg LDFE regions for the region you are mapping to
-    quad_selected_2 = quad_ind_2[quad_index];          // This is the positive or negative root LDFE node you have selected
-    quad_children_2 = quad_selected_2->get_children(); // This is the root node's 1st level children
+    quad_region_2   = region_2->get_quad();            // Quadrature pointer for the region you are mapping to
+    quad_ind_2      = quad_region_2->get_quad();       // Vector of pos and neg LDFE regions for the region you are mapping to
+    quad_selected_2 = quad_ind_2[quad_index];          // Positive or negative root LDFE node you have selected
+    quad_children_2 = quad_selected_2->get_children(); // Root node's 1st level children
     
     /* Case 1: Both quadratures have children */
     if (quad_selected_1->get_has_children() == true && quad_selected_2->get_has_children() == true) {
@@ -79,7 +78,7 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
         while (reached_bottom == false) {
             // Go through the children nodes in the current level
             for (int i=0; i<quad_children_1.size(); i++) {
-                // If both childs have children then add them to a temporary children vector
+                // If both children have children then add them to a temporary children vector
                 if (quad_children_1[i]->get_has_children() == true && quad_children_2[i]->get_has_children() == true) {
                     quad_children_tmp_ind_1 = quad_children_1[i]->get_children();
                     quad_children_tmp_all_1.push_back(quad_children_tmp_ind_1[0]);
@@ -190,7 +189,7 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
                     }
                     quad_inner_children.clear();
                 }
-                // Coarse-to-fine mapping if only quad you are mapping to has children
+                // Coarse-to-fine mapping
                 else if (quad_children_1[i]->get_has_children() == false && quad_children_2[i]->get_has_children() == true) {
                     // Pass solution to quadrature you are mapping to
                     quad_children_2[i]->psi.resize(2);
@@ -300,7 +299,7 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
             else {
                 level++;
             }
-            // Set the inner children vector as the temporary children vetor for the next level calculation
+            // Set the inner children vector as the temporary children vector for the next level calculation
             quad_inner_children = quad_inner_children_tmp_all;
             quad_inner_children_tmp_all.clear();
             quad_inner_children_tmp_ind.clear();
@@ -330,7 +329,7 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
                             at_beginning = false;
                             // Check if the element is at the current col_loc
                             if (map_values[t](0,1)==col_loc) {
-                                col_loc++;        // Incrememnt col_loc
+                                col_loc++;        // Increment col_loc
                                 col_actual = t+1; // Set col_actual as the adjacent position
                                 found = true;
                             }
@@ -371,7 +370,7 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
         quad_inner_children.clear();
     }
     
-    /* Mapping from a base quadrature to a refined quadrature */
+    /* Case 3: Mapping from a base quadrature to a refined quadrature */
     else if (quad_selected_1->get_has_children() == false && quad_selected_2->get_has_children() == true) {
         // Pass solution to quadrature you are mapping to
         quad_selected_2->psi.resize(2);
@@ -438,7 +437,6 @@ void mapping1 (Region* region_1, Region* region_2, string dir) {
     }
 }
 
-// Mapping algorithm preserving zeroth and first moments across LDFE regions
 void mapping2 (Region* region_1, Region* region_2, string dir) {
     
     /* Initialize parameters */
@@ -516,16 +514,16 @@ void mapping2 (Region* region_1, Region* region_2, string dir) {
     }
     
     /* Find the root node for the region you are mapping from */
-    quad_region_1   = region_1->get_quad();            // This is the quadrature pointer for the region you are mapping from
-    quad_ind_1      = quad_region_1->get_quad();       // This is the vector of pos and neg LDFE regions for the region you are mapping from
-    quad_selected_1 = quad_ind_1[quad_index];          // This is the positive or negative root LDFE node you have selected
-    quad_children_1 = quad_selected_1->get_children(); // This is the root node's 1st level children
+    quad_region_1   = region_1->get_quad();            // Quadrature pointer for the region you are mapping from
+    quad_ind_1      = quad_region_1->get_quad();       // Vector of pos and neg LDFE regions for the region you are mapping from
+    quad_selected_1 = quad_ind_1[quad_index];          // Positive or negative root LDFE node you have selected
+    quad_children_1 = quad_selected_1->get_children(); // Root node's 1st level children
     
     /* Find the root node for the region you are mapping to */
-    quad_region_2   = region_2->get_quad();            // This is the quadrature pointer for the region you are mapping to
-    quad_ind_2      = quad_region_2->get_quad();       // This is the vector of pos and neg LDFE regions for the region you are mapping to
-    quad_selected_2 = quad_ind_2[quad_index];          // This is the positive or negative root LDFE node you have selected
-    quad_children_2 = quad_selected_2->get_children(); // This is the root node's 1st level children
+    quad_region_2   = region_2->get_quad();            // Quadrature pointer for the region you are mapping to
+    quad_ind_2      = quad_region_2->get_quad();       // Vector of pos and neg LDFE regions for the region you are mapping to
+    quad_selected_2 = quad_ind_2[quad_index];          // Positive or negative root LDFE node you have selected
+    quad_children_2 = quad_selected_2->get_children(); // Root node's 1st level children
     
     /* Case 1: Both quadratures have children */
     if (quad_selected_1->get_has_children() == true && quad_selected_2->get_has_children() == true) {

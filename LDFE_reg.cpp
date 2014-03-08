@@ -26,19 +26,23 @@ LDFE_reg::LDFE_reg (double min_mu, double max_mu, int current_order, int final_o
         mu_center = (max_mu+min_mu)/2.;
     }
     else if (quad_type == "LDFE_THETA"){
-        /* Convert mu to theta */
         double min_theta = acos(max_mu);
         double max_theta = acos(min_mu);
-        /* Set directions based on theta */
-        dirs(0) = cos(min_theta+(max_theta-min_theta)/4.);
-        dirs(1) = cos(max_theta-(max_theta-min_theta)/4.);
-        mu_center = cos((min_theta+max_theta)/2);
+        mu_center = cos((min_theta+max_theta)/2.);
+        if (mu_center>0) {
+        	dirs(1) = cos(min_theta+(max_theta-min_theta)/4.);
+        	dirs(0) = cos(max_theta-(max_theta-min_theta)/4.);
+        }
+        else {
+        	dirs(0) = cos(min_theta+(max_theta-min_theta)/4.);
+        	dirs(1) = cos(max_theta-(max_theta-min_theta)/4.);
+        }
     }
     
     /* Solve the basis functions of each LDFE range */
     mat A = mat(2, 2);
     mat B = eye<mat>(2, 2);
-    basis.resize(3, 3);
+    basis.resize(2, 2);
     for (int j=0; j<2; j++){
         A(j, 0) = 1.;
         A(j, 1) = dirs(j);
@@ -59,8 +63,14 @@ LDFE_reg::LDFE_reg (double min_mu, double max_mu, int current_order, int final_o
     }
     else {
         has_children = true;
-        
-        children[0] = new LDFE_reg(min_mu, mu_center, current_order+1, final_order, quad_type); // Left child
-        children[1] = new LDFE_reg(mu_center, max_mu, current_order+1, final_order, quad_type); // Right child
+        if (mu_center>0){
+        	children[0] = new LDFE_reg(min_mu, mu_center, current_order+1, final_order, quad_type); // Left child
+        	children[1] = new LDFE_reg(mu_center, max_mu, current_order+1, final_order, quad_type); // Right child
+
+        }
+        else {
+        	children[1] = new LDFE_reg(min_mu, mu_center, current_order+1, final_order, quad_type); // Left child
+        	children[0] = new LDFE_reg(mu_center, max_mu, current_order+1, final_order, quad_type); // Right child
+        }
     }
 }

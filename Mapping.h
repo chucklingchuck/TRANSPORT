@@ -12,10 +12,8 @@
 #include "Common.h"
 #include "Region.h"
 
-// Simple testing algorithm
 void mapping1 (Region*, Region*, string);
 
-// Preserve zeroth and first moments across LDFE regions
 void mapping2 (Region*, Region*, string);
 
 #endif
